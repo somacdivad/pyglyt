@@ -38,3 +38,9 @@ jobs:
             . venv/bin/activate
             flake8
             black --check .
+      
+      - run:
+          name: Run tests
+          command: |
+            . venv/bin/activate
+            pytest --cov pyglyt/
