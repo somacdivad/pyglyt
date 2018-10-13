@@ -4,4 +4,7 @@ lint:
 		black --check .
 
 test:
+		pytest
+
+test-coverage:
 		pytest --cov pyglyt/
