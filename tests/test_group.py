@@ -13,7 +13,7 @@ def trivial_group():
 class TestGroup:
     def test_group_init(self, trivial_group):
         G = trivial_group
-        assert set(G.generators) == set()
+        assert set(G.generators) == {0}
         assert G.operation == operator.add
         assert G.identity is None
 
