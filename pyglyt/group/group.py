@@ -1,3 +1,4 @@
+import itertools
 import operator
 from typing import Any, Callable, Collection
 
@@ -14,9 +15,8 @@ class Group(set):
         self.generators = set(generators)
         self.operation = operation
         self.identity = identity
-        # NOTE: Should `identity` really be `Any` type?
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         """Repr string for group class"""
         return (
             f"{self.__class__.__name__}<"
@@ -24,3 +24,4 @@ class Group(set):
             f"operation={self.operation!r}, "
             f"identity={self.identity!r}>"
         )
+
