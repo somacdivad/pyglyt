@@ -1,4 +1,3 @@
-import itertools
 import operator
 from typing import Any, Callable, Collection
 
@@ -24,4 +23,3 @@ class Group(set):
             f"operation={self.operation!r}, "
             f"identity={self.identity!r}>"
         )
-

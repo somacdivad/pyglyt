@@ -21,4 +21,3 @@ class TestGroup:
         actual = repr(trivial_group)
         expected = "Group<generators=set(), operation=<built-in function add>, identity=0>"
         assert actual == expected
-
