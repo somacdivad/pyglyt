@@ -7,17 +7,17 @@ from pyglyt.group import Group
 
 @pytest.fixture
 def trivial_group():
-    return Group()
+    return Group({0}, operator.add)
 
 
 class TestGroup:
     def test_group_init(self, trivial_group):
         G = trivial_group
         assert set(G.generators) == set()
-        assert G.identity is 0
         assert G.operation == operator.add
+        assert G.identity is None
 
     def test_group_repr(self, trivial_group):
         actual = repr(trivial_group)
-        expected = "Group<generators=set(), operation=<built-in function add>, identity=0>"
+        expected = "Group(generators={0}, operation=<built-in function add>)"
         assert actual == expected
