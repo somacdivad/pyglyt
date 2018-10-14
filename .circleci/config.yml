@@ -42,4 +42,5 @@ jobs:
           name: Run tests
           command: |
             . venv/bin/activate
+            pip install -e .
             make test-coverage
