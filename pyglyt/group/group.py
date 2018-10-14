@@ -1,5 +1,4 @@
-import operator
-from typing import Any, Callable, Collection
+from typing import Callable, Collection, Optional
 
 
 class Group(set):
@@ -7,9 +6,9 @@ class Group(set):
 
     def __init__(
         self,
-        generators: Collection = (),
-        operation: Callable = operator.add,
-        identity: Any = 0,
+        generators: Collection,
+        operation: Callable,
+        identity: Optional = None,
     ) -> None:
         self.generators = set(generators)
         self.operation = operation
@@ -18,8 +17,7 @@ class Group(set):
     def __repr__(self) -> str:
         """Repr string for group class"""
         return (
-            f"{self.__class__.__name__}<"
+            f"{self.__class__.__name__}("
             f"generators={self.generators!r}, "
-            f"operation={self.operation!r}, "
-            f"identity={self.identity!r}>"
+            f"operation={self.operation!r})"
         )
