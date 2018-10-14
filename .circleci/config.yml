@@ -36,11 +36,10 @@ jobs:
           name: Code style check
           command: |
             . venv/bin/activate
-            flake8
-            black --check .
+            make lint
       
       - run:
           name: Run tests
           command: |
             . venv/bin/activate
-            pytest --cov pyglyt/
+            make test-coverage
