@@ -3,13 +3,14 @@ import functools
 from typing import Any, Callable
 
 from .group import Group
+from ..constants import CACHE
 
 
 class Orbit:
     """Orbit class"""
 
     def __init__(
-        self, group: Group, element: Any, action: Callable, cache: bool = True
+        self, group: Group, element: Any, action: Callable, cache: bool = CACHE
     ) -> None:
         self.group = group
         self.element = element
@@ -31,9 +32,11 @@ class Orbit:
             yield self.element
             _powers = self.group._powers
             _generators = self.group.generators
-            # Below line blows up for infinite groups
+            # NOTE: Below line blows up for infinite cyclic groups
             powers_of_generators = tuple(_powers(g) for g in _generators)
             for g in itertools.product(*powers_of_generators):
+                # NOTE: functools.reduce blows up for generators that
+                # generate an infinite cyclic subgroup
                 x = functools.reduce(self.group.operation, g)
                 y = self.action(self.element, x)
                 if y not in self._elements:
