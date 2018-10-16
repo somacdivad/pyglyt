@@ -1,6 +1,6 @@
 import itertools
 import functools
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Generator, Optional
 
 from .group import Group
 from .. import constants
@@ -25,7 +25,7 @@ class Orbit:
         else:
             self._cache = constants.CACHE
 
-    def __iter__(self):
+    def __iter__(self) -> Generator:
         """Return an iterator over elements of the orbit.
 
         Warning: This may cause an infinite loop for infinite groups.
