@@ -33,8 +33,10 @@ class TestOrbit:
     def test_orbit_no_cache(self):
         G = Group((0,), operator.add)
         orbit = Orbit(G, 0, G.operation, cache=False)
-        with pytest.raises(AttributeError):
-            orbit._elements
+        set(orbit)
+        actual = orbit._elements
+        expected = []
+        assert actual == expected
 
     def test_orbit_cache_exists(self, orbit_of_1_in_Z2):
         orbit = orbit_of_1_in_Z2
