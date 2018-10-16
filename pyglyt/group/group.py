@@ -27,14 +27,12 @@ class Group:
         self, element: Any, inverse: Optional[Any] = None
     ) -> Generator:
         """Return an iterator over powers of `element`"""
-        powers = itertools.accumulate(
-            itertools.repeat(element), self.operation
-        )
+        _accumulate = itertools.accumulate
+        _repeat = itertools.repeat
+        powers = _accumulate(_repeat(element), self.operation)
 
         if inverse is not None:
-            neg_powers = itertools.accumulate(
-                itertools.repeat(inverse), self.operation
-            )
+            neg_powers = _accumulate(_repeat(inverse), self.operation)
             powers = itertools.chain.from_iterable(zip(powers, neg_powers))
             identity = self.operation(element, inverse)
             powers = itertools.chain((identity,), powers)
