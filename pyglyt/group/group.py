@@ -1,7 +1,7 @@
 from typing import Callable, Collection, Optional
 
 
-class Group(set):
+class Group:
     """Class implementing an algebraic group"""
 
     def __init__(
