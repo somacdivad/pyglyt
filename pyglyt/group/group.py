@@ -1,4 +1,5 @@
-from typing import Callable, Collection, Optional
+import itertools
+from typing import Any, Callable, Collection, Generator, Optional
 
 
 class Group:
@@ -21,3 +22,24 @@ class Group:
             f"generators={self.generators!r}, "
             f"operation={self.operation!r})"
         )
+
+    def _powers(
+        self, element: Any, inverse: Optional[Any] = None
+    ) -> Generator:
+        """Return an iterator over powers of `element`"""
+        _accumulate = itertools.accumulate
+        _repeat = itertools.repeat
+        powers = _accumulate(_repeat(element), self.operation)
+
+        if inverse is not None:
+            neg_powers = _accumulate(_repeat(inverse), self.operation)
+            powers = itertools.chain.from_iterable(zip(powers, neg_powers))
+            identity = self.operation(element, inverse)
+            powers = itertools.chain((identity,), powers)
+            yield next(powers)  # Yield identity
+
+        yield next(powers)  # Yield `element`
+        for g in powers:
+            if g == element:
+                break
+            yield g
